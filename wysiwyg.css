@@ -1,0 +1,39 @@
+* {
+	margin: 0;
+	padding: 0;
+	line-height: 1.5em;
+}
+
+.container > .person-box:nth-child(even) {
+	background-color: #fff67c;
+}
+
+.container > .person-box:nth-child(odd) {
+	background-color: lightblue;
+}
+
+.person-box {
+	width: 700px;
+	margin: 1em auto;
+	padding: 1em;
+	box-shadow: 2px 2px 40px;
+	overflow: auto;
+}
+
+.person-box img {
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.person-box p {
+	padding: 1em;
+}
+
+.person-box header {
+	font-size: 2em;
+}
+
+.highlight {
+	border: 2px dotted darkgreen;
+}
