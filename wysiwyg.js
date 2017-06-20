@@ -42,10 +42,12 @@ let famousPeople = [
 	  }
 	}
 ]
+
 const container = document.getElementById("container"),
 	textInput = document.getElementById("text-input");
 
-
+// creates a div for each person with a header section and footer and adds it to the page.
+// when clicked on, the divs are highlighted and the text input gains focus.
 function addDOMElements(personObj) {
 	let personBox = document.createElement('div');
 	personBox.setAttribute("id", `${personObj.name}`)
@@ -64,23 +66,37 @@ function addDOMElements(personObj) {
 	})
 }
 
-
 famousPeople.forEach(addDOMElements);
 
+// takes the highlighted div and binds each key press in the text input to the highlighted
+// div's bio area. If backspace is pressed, deletes the last word of the bio.
 textInput.addEventListener("keyup", function() {
 	let changeBioFor = document.getElementsByClassName("highlight");
-	console.log(changeBioFor);
 	if (changeBioFor.length !== 0) {
-		console.log("here we go")
 		let elementToAlter = changeBioFor[0].getElementsByTagName("p")[0];
-		if (event.key === 'Enter') {
+		if (event.key === 'Enter' || event.key === 'Return') {
 			textInput.value = "";
 		} else {
-		elementToAlter.innerHTML += event.key;
+			if ((event.keyCode > 47 && event.keyCode < 58) ||
+				(event.keyCode > 64 && event.keyCode < 91) ||
+				(event.keyCode > 185 && event.keyCode < 193) ||
+				(event.keyCode === 32)) {
+				elementToAlter.innerHTML += event.key;
+			} else if (event.key === "Backspace") {
+				let deleteKey = elementToAlter.innerHTML.split(""),
+					lastIndex = deleteKey.length -1;
+				deleteKey = deleteKey.splice(0, lastIndex).join('');
+				console.log(deleteKey)
+				elementToAlter.innerHTML = deleteKey;
+
+			}
 		}
 	}
 
 })
+
+
+
 
 // Create a DOM element for each of the objects inside the container.
 // Style your person elements however you like.
